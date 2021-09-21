@@ -18,3 +18,5 @@ From <https://foundersandcoders.notion.site/Programme-content-6b4620c22af645f680
 | 6       | Full-stack app          |
 | 7 - 9   | Group project           |
 | 10 - 12 | Tech for Better project |
+
+## Main Projects
