@@ -17,10 +17,10 @@ server.use(staticHandler);
 // 	response.send('<h1>Hello</h1>');
 // });
 
-// function logger(request, response, next) {
-// 	console.log(request.method + ' method is from url ' + request.url);
-// 	next();
-// }
+function logger(request, response, next) {
+	console.log(request.method + ' method is from url ' + request.url);
+	next();
+}
 
 // server.get('/', logger, (request, response) => {
 // 	response.send('<h1>Hello</h1>');
@@ -37,7 +37,7 @@ server.post('/submit', bodyParser, (request, response) => {
 });
 
 // Add a Route: function done when server receives any request (/ is home)
-server.get('/', (request, response) => {
+server.get('/', logger, (request, response) => {
 	// set status
 	response.status(200);
 	// set headers
