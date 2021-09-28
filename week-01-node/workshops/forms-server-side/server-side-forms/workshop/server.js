@@ -80,7 +80,7 @@ server.post('/add-dog', bodyParser, (request, response) => {
 // Delete dog
 
 // Create Server Port
-const PORT = 3333;
+const PORT = 2222;
 server.listen(PORT, () =>
 	console.log(`Yay! Listening on http://localhost:${PORT}`)
 );
