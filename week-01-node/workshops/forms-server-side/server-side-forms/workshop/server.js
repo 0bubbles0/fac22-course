@@ -6,7 +6,7 @@ const server = express();
 const PORT = 3333;
 server.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}`));
 
-// Server setup
+// GET
 server.get('/', (request, response) => {
 	//Search Form
 	const searchForm = `<form><input name="search" />
@@ -33,3 +33,5 @@ server.get('/', (request, response) => {
 	// const list = `<ul>${items}</ul>`;
 	// response.send(list);
 });
+
+// POST: need middleware
