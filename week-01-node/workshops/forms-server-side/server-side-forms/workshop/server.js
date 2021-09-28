@@ -7,21 +7,39 @@ const server = express();
 // GET
 server.get('/', (request, response) => {
 	//Search Form
-	const searchForm = `<form><input name="search" placeholder="Search a dog"/>
-  <button>Search</button></form>`;
-	const userInput = request.query.search;
+	const userInput = request.query.search || '';
 	console.log(userInput);
 
+	const searchForm = `
+	<form>
+		<input name="search" placeholder="Search a dog"/>
+  	<button>Search</button>
+	</form>
+	`;
+
 	// dogs -> list
-	const dogList = Object.values(dogs);
-	const htmlList = dogList
-		.filter(b => b.name.includes(userInput))
-		.map(a => `<li>${a.name}</li>`)
-		.join('');
+	// const dogList = Object.values(dogs);
+	// const htmlList = dogList
+	// 	.filter(b => b.name.includes(userInput))
+	// 	.map(a => `<li>${a.name}</li>`)
+	// 	.join('');
 
-	const fullUl = `<ul>${htmlList}</ul>`;
+	// const fullUl = `<ul>${htmlList}</ul>`;
 
-	const html = `${searchForm}${fullUl}`;
+	let fullUl = '';
+	for (const dog of Object.values(dogs)) {
+		const match = dog.name.toLowerCase().includes(userInput.toLowerCase());
+		// if we don't have a search submission we show all dogs
+		if (match || !userInput) {
+			fullUl += `<li>${dog.name}</li>`;
+		}
+	}
+
+	const html = `
+		${searchForm}
+		${fullUl}
+		<a href="/add-dog">Add dog</a>
+	`;
 	response.send(html);
 
 	// let items = '';
@@ -34,8 +52,13 @@ server.get('/', (request, response) => {
 
 // POST: need middleware
 server.get('/add-dog', (request, response) => {
-	const addForm = `<form><input name="name" placeholder="Dog Name"/><input name="breed" placeholder="Dog Breed"/>
-  <button>Add</button></form>`;
+	const addForm = `
+	<form method="POST">
+		<input name="name" placeholder="Dog Name"/>
+		<input name="breed" placeholder="Dog Breed"/>
+  	<button>Add</button>
+	</form>
+	`;
 	response.send(addForm);
 });
 
@@ -43,20 +66,15 @@ server.get('/add-dog', (request, response) => {
 const bodyParser = express.urlencoded({ extended: false });
 
 server.post('/add-dog', bodyParser, (request, response) => {
-	// console.log('New user post');
-
-	// Make new dog
+	// // Make new dog
 	const answer = request.body;
 	const dogName = answer.name.toLowerCase();
-	// const dogBreed = answer.breed;
-	// const newDetails = { name: dogName, breed: dogBreed };
-	// dogs[dogName] = newDetails;
-	dogs[dogName] = answer;
 	// luna: { name: "Luna", breed: "Cocker Spaniel" },
+	// const newDetails = { name: dogName, breed: dogBreed };
+	dogs[dogName] = answer;
 
 	// Redirect
 	response.redirect('/');
-	// response.send('Yay, thanks for submitting');
 });
 
 // Delete dog
