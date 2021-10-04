@@ -3,7 +3,7 @@ const db = require('../database/connection.js');
 
 function get(request, response) {
 	// send SQL command to db. Promise waits for its return
-	db.query('SELECT * FROM users').then(result => {
+	db.query('SELECT username FROM users').then(result => {
 		// console.log(result);
 		const users = result.rows;
 		const userList = users.map(user => `<li>${user.username}</li>`).join('');

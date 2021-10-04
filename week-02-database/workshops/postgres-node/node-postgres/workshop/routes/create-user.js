@@ -1,5 +1,8 @@
+// Import database connection
+const db = require('../database/connection.js');
+
 function get(request, response) {
-  response.send(/*html*/ `
+	response.send(/*html*/ `
     <form action="create-user" method="POST">
       <p>
         <label for="username">Username</label>
@@ -17,8 +20,27 @@ function get(request, response) {
 }
 
 function post(request, response) {
-  console.log(request.body); // e.g. { username: "oli", ... }
-  response.redirect("/");
+	// console.log(request.body); // e.g. { username: "oli", ... }
+
+	// // find new variables
+	// const newEntry = request.body;
+	// const newUsername = newEntry.username;
+	// const newAge = newEntry.age;
+	// console.log(newUsername);
+
+	// // create SQL insert
+	// db.query(`INSERT INTO users (username, age) VALUES ($1, $2)`, [
+	// 	newUsername,
+	// 	newAge,
+	// ]);
+	const insert_user = /*sql*/ `
+    INSERT INTO users(username, age) VALUES($1, $2)
+  `;
+	const values = [request.body.username, request.body.age];
+
+	db.query(insert_user, values).then(() => {
+		response.redirect('/');
+	});
 }
 
 module.exports = { get, post };
