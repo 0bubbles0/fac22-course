@@ -13,3 +13,10 @@ server.get('/rejection', rejection.get);
 const PORT = process.env.PORT || 5000;
 
 server.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}`));
+
+// in server.js
+process.on('unhandledRejection', error => {
+	console.error(error);
+	process.exit(1);
+	// can restart with Heroku, pm2 systemd
+});
