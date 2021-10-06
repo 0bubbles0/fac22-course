@@ -67,3 +67,16 @@ INSERT INTO students_projects VALUES
 ;
 
 COMMIT;
+
+-- //BONUS
+-- SELECT
+--  projects.name,
+--  students_projects.student_username
+-- FROM projects
+-- INNER JOIN students_projects
+--  ON projects.id = students_projects.project_id
+-- INNER JOIN students
+--  ON students_projects.student_username = students.username
+-- INNER JOIN cohorts
+-- ON students.cohort_name = cohorts.name 
+-- WHERE cohorts.location = 'Finsbury Park';
