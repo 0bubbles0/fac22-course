@@ -59,7 +59,6 @@ server.get('/remove', (request, response) => {
 
 //stateless
 // server.get('/login', (request, response) => {
-// 	const sid = crypto.randomBytes(18).toString('base64');
 // 	const userInfo = {
 // 		id: 1,
 // 		username: 'bubbles',
