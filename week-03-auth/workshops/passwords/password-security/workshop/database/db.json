@@ -1,3 +1,49 @@
 {
-  "users": []
+  "users": [
+    {
+      "email": "a@b.com",
+      "password": "badpass1",
+      "id": 1633957984310
+    },
+    {
+      "email": "b@c.com",
+      "password": "anotherbadpass2",
+      "id": 1633958053330
+    },
+    {
+      "email": "ab@ex.com",
+      "password": "bacbce4b72b27b90ee12ac2d8c011f2eb94c14c42477f0f5ca133367eb397eeb",
+      "id": 1633958728896
+    },
+    {
+      "email": "c@c.com",
+      "password": "770e607624d689265ca6c44884d0807d9b054d23c473c106c72be9de08b7376c",
+      "id": 1633959445903
+    },
+    {
+      "email": "d@d.com",
+      "password": "5b4d9f03571accb91e0142549af99638d0753a3c1d5a109c731556e149ed415d",
+      "id": 1633959951292
+    },
+    {
+      "email": "e@e.com",
+      "password": "$2a$10$PB8Rxk4/UfTa/bdqYiu5neShLeU45Ha1utgk.3GjXFn2K40PJ/4j6",
+      "id": 1633961618971
+    },
+    {
+      "email": "f@f.com",
+      "password": "$2a$10$IdRf0.xF.fh5v1FdqQjoruOKFln.LYILc9wlBw/5ANEm9sdxAVTXy",
+      "id": 1633961685869
+    },
+    {
+      "email": "g@g.com",
+      "password": "$2a$10$7lKXrqgmeqmZxrw1ZhhwuO5NwtlSdgp1rnvqonMD/Z6fgW1D839l2",
+      "id": 1633963028528
+    },
+    {
+      "email": "h@h.com",
+      "password": "$2a$10$0.5oAho3vt/DntnNDn0UfugKBKq.HF0ODdDBvE7BpaRklMLocsOoa",
+      "id": 1633963112634
+    }
+  ]
 }
