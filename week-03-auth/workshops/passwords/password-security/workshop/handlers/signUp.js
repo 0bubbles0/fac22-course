@@ -21,24 +21,7 @@ function get(request, response) {
 
 // const SALT = 'blkcjd5x6sfs952.';
 function post(request, response) {
-	console.log(request.body);
 	const { email, password } = request.body;
-	//Old
-	// const hashedPassword = crypto
-	// 	.createHash('sha256')
-	// 	.update(`${SALT}${password}`)
-	// 	.digest('hex');
-	//New
-	// model
-	// 	.createUser({ email, password: hashedPassword })
-	// 	.then(() => {
-	// 		response.send(`<h1>Welcome ${email}</h1>`);
-	// 	})
-	// 	.catch(error => {
-	// 		console.error(error);
-	// 		response.send(`<h1>Something went wrong, sorry</h1>`);
-	// 	});
-
 	// New: bcrypt library
 	bcrypt
 		.hash(password, 10)
@@ -50,6 +33,21 @@ function post(request, response) {
 			console.error(error);
 			response.send(`<h1>Something went wrong, sorry</h1>`);
 		});
+
+	//Old
+	// const hashedPassword = crypto
+	// 	.createHash('sha256')
+	// 	.update(`${SALT}${password}`)
+	// 	.digest('hex');
+	// model
+	// 	.createUser({ email, password: hashedPassword })
+	// 	.then(() => {
+	// 		response.send(`<h1>Welcome ${email}</h1>`);
+	// 	})
+	// 	.catch(error => {
+	// 		console.error(error);
+	// 		response.send(`<h1>Something went wrong, sorry</h1>`);
+	// 	});
 }
 
 module.exports = { get, post };

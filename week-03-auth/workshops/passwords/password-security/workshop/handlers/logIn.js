@@ -19,9 +19,22 @@ function get(request, response) {
   `);
 }
 
-const SALT = 'blkcjd5x6sfs952.';
+// const SALT = 'blkcjd5x6sfs952.';
 function post(request, response) {
 	const { email, password } = request.body;
+	//New
+	model
+		.getUser(email)
+		.then(dbUser => bcrypt.compare(password, dbUser.password))
+		.then(match => {
+			if (!match) throw new Error('Password mismatch');
+			response.send(`<h1>Welcome back, ${email}</h1>`);
+		})
+		.catch(error => {
+			console.error(error);
+			response.send(`<h1>User not found</h1>`);
+		});
+
 	//Old
 	// model
 	// .getUser(email)
@@ -36,18 +49,6 @@ function post(request, response) {
 	// 		response.send(`<h1>Welcome back, ${email}</h1>`);
 	// 	}
 	// })
-	//New
-	model
-		.getUser(email)
-		.then(dbUser => bcrypt.compare(password, dbUser.password))
-		.then(match => {
-			if (!match) throw new Error('Password mismatch');
-			response.send(`<h1>Welcome back, ${email}</h1>`);
-		})
-		.catch(error => {
-			console.error(error);
-			response.send(`<h1>User not found</h1>`);
-		});
 }
 
 module.exports = { get, post };
