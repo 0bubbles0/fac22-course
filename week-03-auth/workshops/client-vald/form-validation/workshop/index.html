@@ -1,22 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Learn form validation</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <h1>Create an account</h1>
-    <form>
-      <label for="email">Email</label>
-      <input id="email" />
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Learn form validation</title>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<h1>Create an account</h1>
+		<form novalidate>
+			<label for="email">Email <span aria-hidden="true">*</span></label>
+			<input
+				id="email"
+				type="email"
+				pattern="[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,63}$"
+				aria-describedby="emailError"
+				required
+			/>
+			<div id="emailError" class="error"></div>
 
-      <label for="password">Password</label>
-      <input id="password" />
+			<label for="password">Password <span aria-hidden="true">*</span></label>
+			<div id="password-instr">
+				min 8 characters, including at least 1 number
+			</div>
+			<input
+				id="password"
+				type="password"
+				pattern=".*[a-zA-Z\d]+.*"
+				minlength="8"
+				required
+				aria-describedby="password-instr passwordError"
+			/>
+			<div id="passwordError" class="error"></div>
 
-      <button>Sign up</button>
-    </form>
-    <script src="index.js"></script>
-  </body>
+			<button>Sign up</button>
+		</form>
+		<script src="index.js"></script>
+	</body>
 </html>
