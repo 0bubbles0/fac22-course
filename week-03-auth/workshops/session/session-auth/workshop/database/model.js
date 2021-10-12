@@ -10,16 +10,13 @@ function createUser(email, hash, name) {
 		.then(result => result.rows[0]);
 }
 
-function createSession(sid, datObj) {
+function createSession(sid, data) {
 	const INSERT_SESSION = /*sql*/ `
-    INSERT INTO sessions
-    (sid, data)
-    VALUES ($1, $2) 
-    RETURNING sid
+    INSERT INTO sessions (sid, data) VALUES ($1, $2) RETURNING sid
   `;
 	return db
-		.query(INSERT_SESSION, [sid, datObj])
-		.then(result => console.log(result.rows[0].sid));
+		.query(INSERT_SESSION, [sid, data])
+		.then(result => result.rows[0].sid);
 }
 
 function getUser(email) {
@@ -37,9 +34,14 @@ function getSession(sid) {
 	});
 }
 
+function deleteSession(sid) {
+	const DELETE_SESSION = 'DELETE FROM sessions WHERE sid=$1';
+	return db.query(DELETE_SESSION, [sid]);
+}
+
 module.exports = {
 	createUser,
-	getUser,
 	createSession,
+	getUser,
 	getSession,
 };

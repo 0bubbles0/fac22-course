@@ -1,7 +1,7 @@
-const auth = require("../auth.js");
+const auth = require('../auth.js');
 
 function get(request, response) {
-  response.send(`
+	response.send(`
     <h1>Create an account</h1>
     <form action="sign-up" method="POST">
       <label for="name">Name</label>
@@ -16,9 +16,21 @@ function get(request, response) {
 }
 
 function post(request, response) {
-  const { email, password, name } = request.body;
-  console.log("Signing up...");
-  response.redirect("/");
+	const { email, password, name } = request.body;
+	// Hash password -> create user
+	// create sid -> createSession
+	// Set cookie for this sid to stay logged-in
+	auth
+		.createUser(email, password, name)
+		.then(user => auth.saveUserSession(user))
+		.then(sid => {
+			response.cookie('sid', sid, auth.COOKIE_OPTIONS);
+			response.redirect('/');
+		})
+		.catch(error => {
+			console.error(error);
+			response.send(`<h1>Something went wrong, sorry</h1>`);
+		});
 }
 
 module.exports = { get, post };
