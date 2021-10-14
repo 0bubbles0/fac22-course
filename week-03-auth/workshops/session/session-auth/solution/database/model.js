@@ -17,6 +17,16 @@ function getUser(email) {
 	return db.query(SELECT_USER, [email]).then(result => result.rows[0]);
 }
 
+//Olis:
+function getSession(sid) {
+	const SELECT_SESSION = 'SELECT data FROM sessions WHERE sid=$1';
+	return db.query(SELECT_SESSION, [sid]).then(result => {
+		const singleResult = result.rows[0];
+		return singleResult && singleResult.data;
+	});
+}
+
+// Ours:
 function getSession(sid) {
 	const SELECT_SESSION = 'SELECT data FROM sessions WHERE sid=$1';
 	return db.query(SELECT_SESSION, [sid]).then(result => {
