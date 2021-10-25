@@ -1,0 +1,24 @@
+html {
+	background-color: blue;
+}
+
+body {
+	max-width: 100ch;
+	margin: auto;
+}
+
+body > * {
+	margin: inherit;
+	text-align: center;
+}
+
+.font-red {
+	color: red;
+}
+
+img {
+	width: 90vw;
+	max-width: 60ch;
+	width: minmax(90vw, 60ch);
+	height: auto;
+}

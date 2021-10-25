@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+	<meta charset="utf-8" />
+	<title>Component Proponent | FAC React</title>
+
+	<body>
+		<!-- These scripts will make React and ReactDOM globally available. -->
+		<script src="https://unpkg.com/react@%5E17/umd/react.development.js"></script>
+		<script src="https://unpkg.com/react-dom@%5E17/umd/react-dom.development.js"></script>
+		<!-- This will let us write JSX and ES6 in a script tag with a special type of "text/babel" -->
+		<script src="https://unpkg.com/babel-standalone@%5E6/babel.js"></script>
+
+		<div id="root"></div>
+
+		<script type="text/babel">
+			const root = document.getElementById('root');
+			let rememberNr;
+
+			function Counter(props) {
+				const [count, f] = React.useState(rememberNr || 2);
+				const increment = () => {
+					f(count * 2);
+					rememberNr = count * 2;
+				};
+				// React.useEffect(() => {
+				// 	function cleanup() {
+				// 		rememberNr = count;
+				// 	}
+				// 	return cleanup;
+				// }, [count]);
+				return <button onClick={increment}>Count is {count}</button>;
+			}
+
+			function Speaker(props) {
+				const [word, f] = React.useState('a');
+				const increment = () => f(word + 'a');
+				return <button onClick={increment}>Word is {word}</button>;
+			}
+
+			function Toggle(props) {
+				const [open, setOpen] = React.useState(false);
+				const toggle = () => setOpen(!open);
+				console.log(open);
+
+				React.useEffect(() => {
+					document.title = open;
+				}, [open]);
+
+				return (
+					<React.Fragment>
+						<button onClick={toggle}>Toggle</button>
+						{open ? <div>{props.children}</div> : null}
+					</React.Fragment>
+				);
+			}
+
+			function MousePosition() {
+				const [x, setX] = React.useState(0);
+				const [y, setY] = React.useState(0);
+
+				React.useEffect(() => {
+					const handleMouseMove = (event) => {
+						setX(event.x);
+						setY(event.y);
+					};
+					window.addEventListener('mousemove', handleMouseMove);
+					function cleanup() {
+						window.removeEventListener('mousemove', handleMouseMove(event));
+					}
+					return cleanup;
+				}, []);
+
+				return (
+					<p>
+						Mouse X: {x}, Mouse Y: {y}
+					</p>
+				);
+			}
+
+			function App() {
+				return (
+					<div>
+						<Speaker />
+						<Toggle>
+							<MousePosition />
+							<Counter />
+						</Toggle>
+					</div>
+				);
+			}
+
+			ReactDOM.render(<App />, root);
+			// ReactDOM.render(<MousePosition />, root);
+		</script>
+	</body>
+</html>
