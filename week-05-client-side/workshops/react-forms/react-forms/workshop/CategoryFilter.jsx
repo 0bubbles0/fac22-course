@@ -3,19 +3,6 @@ import App from "./App.jsx";
 import {DishList} from "./DishList.jsx";
 import {PriceFilter} from "./PriceFilter.jsx";
 
-//   Example
-//   <label htmlFor="burger">
-//   Burger
-//   <input
-//     type="radio"
-//     name="categories"
-//     id="burger"
-//     value="burger"
-//     checked={someStateVar === "burger"}
-//     onChange={(event) => setSomeStateVar(event.target.value)}
-//   />
-// </label>
-
 const categories = [
   "all",
   "burger",
