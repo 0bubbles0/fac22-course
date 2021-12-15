@@ -9,9 +9,7 @@ export default function handler(req, res) {
 			id: req.body.id,
 			fields: {
 				Status: 'Confirmed',
-				'Suggested Dates': '',
 				'Confirmed Date': req.body['Confirmed Date'],
-				Notes: req.body.notes,
 			},
 		},
 		function (err, records) {
